@@ -1,0 +1,31 @@
+.container{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+
+}
+.pinnedContainer {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.unpinnedContainer {
+    overflow-y: auto;
+    max-height: calc(100vh - 50px); /* Adjust height as needed */
+}
+
+.tab {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+    background-color: #fff;
+    cursor: move;
+}
+
+.tab.hover {
+    background-color: #f0f0f0;
+}

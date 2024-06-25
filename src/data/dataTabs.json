@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "Dashboard"
+  },
+  {
+    "id": 2,
+    "title": "Banking"
+  },
+  {
+    "id": 3,
+    "title": "Telefonie"
+  },
+  {
+    "id": 4,
+    "title": "Accounting"
+  },
+  {
+    "id": 5,
+    "title": "Verkauf"
+  },
+  {
+    "id": 6,
+    "title": "Statistik"
+  },
+  {
+    "id": 7,
+    "title": "Post Office"
+  },
+  {
+    "id": 8,
+    "title": "Administration"
+  },
+  {
+    "id": 9,
+    "title": "Help"
+  },
+  {
+    "id": 10,
+    "title": "Warenbestand"
+  },
+  {
+    "id": 11,
+    "title": "Auswahllisten"
+  },
+  {
+    "id": 12,
+    "title": "Einkauf"
+  },
+  {
+    "id": 13,
+    "title": "Rechn"
+  },
+  {
+    "id": 14,
+    "title": "Logerverwaltung"
+  },
+  {
+    "id": 15,
+    "title": "Verkauf"
+  }
+]

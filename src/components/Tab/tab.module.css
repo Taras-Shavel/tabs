@@ -1,0 +1,11 @@
+.tab {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+    background-color: #fff;
+    cursor: move;
+}
+
+.tab.hover {
+    background-color: #f0f0f0;
+}
