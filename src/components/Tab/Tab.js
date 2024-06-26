@@ -34,7 +34,7 @@ const Tab = ({ tab, index, moveTab, canDrop, togglePin }) => {
                 opacity: isDragging ? 0.5 : 1,
             }}
         >
-            {tab.title}
+            {tab.pinned ? tab.title.charAt(0) : tab.title}
         </div>
     );
 };

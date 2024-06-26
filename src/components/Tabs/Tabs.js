@@ -25,15 +25,12 @@ const Tabs = () => {
         const updatedTabs = [...tabs];
         const dragTab = updatedTabs[dragIndex];
 
-        // Move the dragged tab to the new position
         updatedTabs.splice(dragIndex, 1);
         updatedTabs.splice(hoverIndex, 0, dragTab);
 
-        // Update pinned and unpinned tabs separately
         const pinnedTabs = updatedTabs.filter(tab => tab.pinned);
         const unpinnedTabs = updatedTabs.filter(tab => !tab.pinned);
 
-        // Combine updated pinned and unpinned tabs
         setTabs(pinnedTabs.concat(unpinnedTabs));
     }, [tabs]);
 
@@ -41,11 +38,9 @@ const Tabs = () => {
         const updatedTabs = [...tabs];
         updatedTabs[index].pinned = !updatedTabs[index].pinned;
 
-        // Update pinned and unpinned tabs separately
         const pinnedTabs = updatedTabs.filter(tab => tab.pinned);
         const unpinnedTabs = updatedTabs.filter(tab => !tab.pinned);
 
-        // Combine updated pinned and unpinned tabs
         setTabs(pinnedTabs.concat(unpinnedTabs));
     }, [tabs]);
 

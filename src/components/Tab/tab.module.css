@@ -3,7 +3,8 @@
     border: 1px solid #ccc;
     margin-bottom: 5px;
     background-color: #fff;
-    /*cursor: move;*/
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .tab.hover {
@@ -12,4 +13,12 @@
 .pinned {
     background-color: yellow;
     border: 2px solid orange;
+}
+.tab.pinned {
+    width: 20px;
+    overflow: hidden;
+    text-align: center;
+}
+.tab.hover {
+    background-color: #f0f0f0;
 }
