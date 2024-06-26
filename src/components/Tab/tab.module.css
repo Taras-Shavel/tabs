@@ -9,3 +9,7 @@
 .tab.hover {
     background-color: #f0f0f0;
 }
+.pinned {
+    background-color: yellow;
+    border: 2px solid orange;
+}

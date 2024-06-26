@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useDrop } from 'react-dnd';
 import tabsData from '../../data/dataTabs.json';
 import Tab from "../Tab/Tab";
 import css from './tabs.module.css';
 
 const LOCAL_STORAGE_KEY = 'tabs';
 
-const TabsComponent = () => {
+const Tabs = () => {
     const [tabs, setTabs] = useState([]);
 
     useEffect(() => {
@@ -30,21 +29,26 @@ const TabsComponent = () => {
         setTabs(updatedTabs);
     }, [tabs]);
 
+    const togglePin = useCallback((index) => {
+        const updatedTabs = [...tabs];
+        updatedTabs[index].pinned = !updatedTabs[index].pinned;
+        setTabs(updatedTabs);
+    }, [tabs]);
+
     return (
         <div className={css.container}>
-            {
-                tabs.map((tab, index) => (
-                    <Tab
-                        key={tab.id}
-                        tab={tab}
-                        index={index}
-                        moveTab={moveTab}
-                        canDrop={hoverIndex => tabs[hoverIndex].pinned === tab.pinned}
-                    />
-                ))
-            }
+            {tabs.map((tab, index) => (
+                <Tab
+                    key={tab.id}
+                    tab={tab}
+                    index={index}
+                    moveTab={moveTab}
+                    canDrop={hoverIndex => tabs[hoverIndex].pinned === tab.pinned}
+                    togglePin={togglePin}
+                />
+            ))}
         </div>
     );
 };
 
-export default TabsComponent;
+export default Tabs;
