@@ -32,12 +32,19 @@ const Tabs = () => {
     const togglePin = useCallback((index) => {
         const updatedTabs = [...tabs];
         updatedTabs[index].pinned = !updatedTabs[index].pinned;
-        setTabs(updatedTabs);
+
+        const pinnedTabs = updatedTabs.filter(tab => tab.pinned);
+        const unpinnedTabs = updatedTabs.filter(tab => !tab.pinned);
+
+        setTabs(pinnedTabs.concat(unpinnedTabs));
     }, [tabs]);
+
+    const pinnedTabs = tabs.filter(tab => tab.pinned);
+    const unpinnedTabs = tabs.filter(tab => !tab.pinned);
 
     return (
         <div className={css.container}>
-            {tabs.map((tab, index) => (
+            {pinnedTabs.concat(unpinnedTabs).map((tab, index) => (
                 <Tab
                     key={tab.id}
                     tab={tab}
