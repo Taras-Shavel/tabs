@@ -5,6 +5,7 @@
     background-color: #fff;
     cursor: pointer;
     transition: all 0.3s ease;
+    width: 140px;
 }
 
 .tab.hover {
@@ -22,3 +23,8 @@
 .tab.hover {
     background-color: #f0f0f0;
 }
+
+
+
+
+

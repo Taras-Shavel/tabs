@@ -1,10 +1,11 @@
-.container{
+.container {
     width: 100%;
     height: 50px;
     display: flex;
     gap: 10px;
 
 }
+
 .pinnedContainer {
     position: sticky;
     top: 0;
@@ -29,3 +30,49 @@
 .tab.hover {
     background-color: #f0f0f0;
 }
+
+
+.dropdownContainer {
+    position: relative;
+    display: inline-block;
+    text-align: left;
+}
+
+.dropdownToggle {
+    height: 2.5rem;
+    width: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.dropdownMenu {
+    position: absolute;
+    right: 0;
+    margin-top: 0.5rem;
+    width: 14rem;
+    border-radius: 0.375rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 50;
+}
+
+.menuItems {
+    padding: 0.25rem 0;
+}
+
+.menuItem {
+    display: block;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    color: #4a5568;
+    text-decoration: none;
+}
+
+.menuItem:hover {
+    background-color: #f7fafc;
+}
+
+

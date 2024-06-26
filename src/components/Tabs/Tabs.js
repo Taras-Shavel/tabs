@@ -1,12 +1,17 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import tabsData from '../../data/dataTabs.json';
 import Tab from "../Tab/Tab";
 import css from './tabs.module.css';
+import { ChevronDown } from 'react-feather';
 
 const LOCAL_STORAGE_KEY = 'tabs';
 
 const Tabs = () => {
     const [tabs, setTabs] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
+    const containerRef = useRef(null);
+    const [visibleTabs, setVisibleTabs] = useState([]);
+    const [overflowTabs, setOverflowTabs] = useState([]);
 
     useEffect(() => {
         const savedTabs = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -21,6 +26,20 @@ const Tabs = () => {
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tabs));
     }, [tabs]);
 
+    useEffect(() => {
+        const updateTabs = () => {
+            const containerWidth = containerRef.current.offsetWidth;
+            const tabWidth = 150;
+            const visibleCount = Math.floor(containerWidth / tabWidth);
+            setVisibleTabs(tabs.slice(0, visibleCount));
+            setOverflowTabs(tabs.slice(visibleCount));
+        };
+
+        updateTabs();
+        window.addEventListener('resize', updateTabs);
+        return () => window.removeEventListener('resize', updateTabs);
+    }, [tabs]);
+
     const moveTab = useCallback((dragIndex, hoverIndex) => {
         const updatedTabs = [...tabs];
         const dragTab = updatedTabs[dragIndex];
@@ -31,8 +50,15 @@ const Tabs = () => {
         const pinnedTabs = updatedTabs.filter(tab => tab.pinned);
         const unpinnedTabs = updatedTabs.filter(tab => !tab.pinned);
 
+        // Check if there's space in visibleTabs to insert from overflowTabs
+        if (visibleTabs.length < tabs.length) {
+            const firstOverflowTab = overflowTabs[0];
+            setOverflowTabs(overflowTabs.slice(1));
+            setVisibleTabs([...visibleTabs.slice(0, hoverIndex), firstOverflowTab, ...visibleTabs.slice(hoverIndex)]);
+        }
+
         setTabs(pinnedTabs.concat(unpinnedTabs));
-    }, [tabs]);
+    }, [tabs, visibleTabs, overflowTabs]);
 
     const togglePin = useCallback((index) => {
         const updatedTabs = [...tabs];
@@ -44,9 +70,13 @@ const Tabs = () => {
         setTabs(pinnedTabs.concat(unpinnedTabs));
     }, [tabs]);
 
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
+
     return (
-        <div className={css.container}>
-            {tabs.map((tab, index) => (
+        <div className={css.container} ref={containerRef}>
+            {visibleTabs.map((tab, index) => (
                 <Tab
                     key={tab.id}
                     tab={tab}
@@ -54,8 +84,32 @@ const Tabs = () => {
                     moveTab={moveTab}
                     canDrop={hoverIndex => tabs[hoverIndex].pinned === tab.pinned}
                     togglePin={togglePin}
+                    style={{ width: '150px' }}
                 />
             ))}
+            {overflowTabs.length > 0 && (
+                <div className={css.dropdownContainer}>
+                    <div className={css.dropdownToggle} onClick={toggleDropdown}>
+                        <ChevronDown size={24} />
+                    </div>
+                    {isOpen && (
+                        <div className={css.dropdownMenu}>
+                            {overflowTabs.map((tab, index) => (
+                                <div key={tab.id} className={css.menuItem}>
+                                    <Tab
+                                        tab={tab}
+                                        index={visibleTabs.length + index}
+                                        moveTab={moveTab}
+                                        canDrop={hoverIndex => tabs[hoverIndex].pinned === tab.pinned}
+                                        togglePin={togglePin}
+                                        style={{ width: '150px' }}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
     );
 };
