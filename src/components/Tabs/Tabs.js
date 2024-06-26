@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, {useState, useEffect, useCallback, useRef} from 'react';
 import tabsData from '../../data/dataTabs.json';
 import Tab from "../Tab/Tab";
 import css from './tabs.module.css';
-import { ChevronDown } from 'react-feather';
+import {ChevronDown} from 'react-feather';
 
 const LOCAL_STORAGE_KEY = 'tabs';
 
@@ -50,7 +50,7 @@ const Tabs = () => {
         const pinnedTabs = updatedTabs.filter(tab => tab.pinned);
         const unpinnedTabs = updatedTabs.filter(tab => !tab.pinned);
 
-        // Check if there's space in visibleTabs to insert from overflowTabs
+
         if (visibleTabs.length < tabs.length) {
             const firstOverflowTab = overflowTabs[0];
             setOverflowTabs(overflowTabs.slice(1));
@@ -76,21 +76,10 @@ const Tabs = () => {
 
     return (
         <div className={css.container} ref={containerRef}>
-            {visibleTabs.map((tab, index) => (
-                <Tab
-                    key={tab.id}
-                    tab={tab}
-                    index={index}
-                    moveTab={moveTab}
-                    canDrop={hoverIndex => tabs[hoverIndex].pinned === tab.pinned}
-                    togglePin={togglePin}
-                    style={{ width: '150px' }}
-                />
-            ))}
             {overflowTabs.length > 0 && (
                 <div className={css.dropdownContainer}>
                     <div className={css.dropdownToggle} onClick={toggleDropdown}>
-                        <ChevronDown size={24} />
+                        <ChevronDown size={24}/>
                     </div>
                     {isOpen && (
                         <div className={css.dropdownMenu}>
@@ -102,7 +91,7 @@ const Tabs = () => {
                                         moveTab={moveTab}
                                         canDrop={hoverIndex => tabs[hoverIndex].pinned === tab.pinned}
                                         togglePin={togglePin}
-                                        style={{ width: '150px' }}
+                                        style={{width: '150px'}}
                                     />
                                 </div>
                             ))}
@@ -110,6 +99,18 @@ const Tabs = () => {
                     )}
                 </div>
             )}
+            {visibleTabs.map((tab, index) => (
+                <Tab
+                    key={tab.id}
+                    tab={tab}
+                    index={index}
+                    moveTab={moveTab}
+                    canDrop={hoverIndex => tabs[hoverIndex].pinned === tab.pinned}
+                    togglePin={togglePin}
+                    style={{width: '150px'}}
+                />
+            ))}
+
         </div>
     );
 };

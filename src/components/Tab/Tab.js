@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
-import { useDrag, useDrop } from 'react-dnd';
+import React from 'react';
+import {useDrag, useDrop} from 'react-dnd';
 import css from './tab.module.css';
 
 const ItemType = 'TAB';
 
-const Tab = ({ tab, index, moveTab, canDrop, togglePin }) => {
-    const [{ isDragging }, drag] = useDrag({
+const Tab = ({tab, index, moveTab, canDrop, togglePin}) => {
+    const [{isDragging}, drag] = useDrag({
         type: ItemType,
-        item: { index },
+        item: {index},
         canDrag: tab.pinned,
     });
 
-    const [{ isOver, canDropItem }, drop] = useDrop({
+    const [{isOver, canDropItem}, drop] = useDrop({
         accept: ItemType,
         canDrop: (draggedItem) => canDrop(index) && draggedItem.index !== index,
         drop: (draggedItem) => {
@@ -24,7 +24,6 @@ const Tab = ({ tab, index, moveTab, canDrop, togglePin }) => {
             canDropItem: monitor.canDrop()
         })
     });
-
 
 
     return (
