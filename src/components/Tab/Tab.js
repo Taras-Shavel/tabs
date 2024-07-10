@@ -25,10 +25,9 @@ const Tab = ({tab, index, moveTab, canDrop, togglePin}) => {
         })
     });
 
-    const [isSelected, setIsSelected] = useState(false); // Стан для збереження обраного стану блоку
-
+    const [isSelected, setIsSelected] = useState(false);
     const handleTabClick = () => {
-        setIsSelected(!isSelected); // Перемикач для обраного стану
+        setIsSelected(!isSelected);
     };
     return (
         <div
