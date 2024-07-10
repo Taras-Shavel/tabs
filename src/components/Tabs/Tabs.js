@@ -71,7 +71,7 @@ const Tabs = () => {
     }, [tabs]);
 
     const toggleDropdown = () => {
-        setIsOpen(!isOpen);
+        setIsOpen((isOpen) => !isOpen);
     };
 
     return (

@@ -1,20 +1,31 @@
 .tab {
     padding: 10px;
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
     margin-bottom: 5px;
-    background-color: #fff;
+    background-color: white;
+    /*border-left: 2px solid green;*/
+    color: green;
+    font-size: 20px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    /*transition: all 0.3s ease;*/
     width: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
+.tab#selected{
+    border-bottom: 2px solid green;
+    font-weight: bold;
+}
 .tab.hover {
     background-color: #f0f0f0;
 }
 
 .pinned {
-    background-color: yellow;
-    border: 2px solid orange;
+    /*background-color: green;*/
+    color: green;
+    border: 2px solid green;
+    border-radius: 20%;
 }
 
 .tab.pinned {

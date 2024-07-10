@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useDrag, useDrop} from 'react-dnd';
 import css from './tab.module.css';
 
@@ -25,10 +25,16 @@ const Tab = ({tab, index, moveTab, canDrop, togglePin}) => {
         })
     });
 
+    const [isSelected, setIsSelected] = useState(false); // Стан для збереження обраного стану блоку
 
+    const handleTabClick = () => {
+        setIsSelected(!isSelected); // Перемикач для обраного стану
+    };
     return (
         <div
             ref={node => drop(drag(node))}
+            onClick={handleTabClick}
+            id={`${isSelected ? `${css.selected}` : ''}`}
             className={`${css.tab} ${isOver && canDropItem ? css.hover : ''} ${tab.pinned ? css.pinned : ''}`}
             onDoubleClick={() => togglePin(index)}
             style={{
@@ -36,7 +42,6 @@ const Tab = ({tab, index, moveTab, canDrop, togglePin}) => {
             }}
         >
             {tab.pinned ? tab.title.charAt(0) : tab.title}
-
 
         </div>
     );
